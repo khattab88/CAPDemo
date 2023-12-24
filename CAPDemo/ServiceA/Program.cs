@@ -8,6 +8,13 @@ namespace ServiceA
 
             // Add services to the container.
 
+            builder.Services.AddCap(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseRabbitMQ(builder.Configuration.GetConnectionString("RabbitMQ"));
+                options.UseDashboard();
+            });
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
